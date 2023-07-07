@@ -11,6 +11,8 @@ on:					# It is used to automatically trigger a workflow.
 # repository occurs.
     branches: [ master ]		# filter to configure your workflow to only run
 # on pull requests that target specific branches.
+  repository_dispatch:
+    types: [predictionjs]
 # A workflow run is made up of one or more jobs that can run sequentially or in 
 # parallel.
 jobs:					# A workflow run is made up of one or more jobs,
