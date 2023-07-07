@@ -6,7 +6,7 @@ import reportWebVitals from './reportWebVitals';
 
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
-const callWorkFlow = async (url, urlbin, modelname) => {
+const callWorkFlow = async (url,  urlbin, modelname) => {
  //alert(GITHUB_TOKEN);        
  let datakey = "i-love-adsoftsito|" + Date.now();
  console.log(datakey);
