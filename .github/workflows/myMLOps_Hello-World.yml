@@ -1,4 +1,4 @@
-name: Modelops deploy		# The name of your workflow. GitHub displays 
+	# The name of your workflow. GitHub displays 
 # the names of your workflows on your
 # repository's "Actions" tab.
 on:					# It is used to automatically trigger a workflow.
