@@ -1,4 +1,4 @@
-	# The name of your workflow. GitHub displays 
+name: Modelops deploy		# The name of your workflow. GitHub displays 
 # the names of your workflows on your
 # repository's "Actions" tab.
 on:					# It is used to automatically trigger a workflow.
@@ -87,3 +87,4 @@ jobs:					# A workflow run is made up of one or more jobs,
         namespace: ${{secrets.OKTETO_NAMESPACE }}
         manifest: manifests/linear_model_k8s.yml
         tag: ${{ secrets.DOCKER_USERNAME }}/tensorflow_${{secrets.MODEL_NAME}}:${{ github.sha }}
+
