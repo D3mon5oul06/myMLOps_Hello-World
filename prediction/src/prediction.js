@@ -1,8 +1,8 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { useEffect } from 'react';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import * as tf from '@tensorflow/tfjs';
 
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
@@ -45,11 +45,45 @@ const sha256 = async (data) => {
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   const digest = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   return digest;
-}
+};
+
+const MyComponent = () => {
+  useEffect(() => {
+    const doTraining = async (model) => {
+      const history = await model.fit(xs, ys, { 
+        epochs: 500,
+        callbacks: {
+          onEpochEnd: async (epoch, logs) => {
+            console.log("Epoch: " + epoch + " Loss: " + logs.loss);
+          }
+        }
+      });
+    };
+
+    const model = tf.sequential();
+    model.add(tf.layers.dense({ units: 1, inputShape: [1] }));
+    model.compile({ loss: 'meanSquaredError', optimizer: 'sgd' });
+    model.summary();
+
+    const xs = tf.tensor2d([-1.0, 0.0, 1.0, 2.0, 3.0, 4.0], [6, 1]);
+    const ys = tf.tensor2d([-3.0, -1.0, 2.0, 3.0, 5.0, 7.0], [6, 1]);
+
+    doTraining(model).then(() => {
+      alert(model.predict(tf.tensor2d([10], [1, 1])));
+    });
+  }, []);
+
+  return (
+    <div>
+      <h1>Hello World</h1>
+
+    </div>
+  );
+};
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MyComponent />
   </React.StrictMode>,
   document.getElementById('root')
 );
